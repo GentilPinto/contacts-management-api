@@ -14,7 +14,7 @@ const usersRouter = require('./routes/user');
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,12 +24,10 @@ app.use('/', indexRouter);
 app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(_request, _response, next) {
-    next(createError(404));
-});
+app.use((_request, _response, next) => next(createError(404)));
 
 // error handler
-app.use(function(error, request, response, _next) {
+app.use((error, request, response, _next) => {
     // set locals, only providing error in development
     response.locals.message = error.message;
     response.locals.error = request.app.get('env') === 'development' ? error : {};
